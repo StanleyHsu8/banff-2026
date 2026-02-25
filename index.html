@@ -6,680 +6,298 @@
 <title>Banff • June 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --pine: #1a3a2a;
-    --forest: #2d5a3d;
-    --glacier: #4a9eba;
-    --sky: #a8d8ea;
-    --sunrise: #f4845f;
-    --gold: #f5c842;
-    --snow: #f9f5ef;
-    --bark: #8b5e3c;
-    --mist: #e8f4f0;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--snow);
-    color: var(--pine);
-    overflow-x: hidden;
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--pine);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 2rem;
-  }
-
-  .hero-mountains {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-  }
-
-  .hero-sky {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #0d1f2d 0%, #1a3a5c 30%, #c45c2e 60%, #f4845f 75%, #f9c46b 85%, #a8d8ea 100%);
-    opacity: 0.85;
-  }
-
-  .hero-stars {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 50%;
-  }
-
-  .star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle 3s ease-in-out infinite;
-  }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    animation: fadeUp 1.2s ease both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    animation: fadeUp 1.2s ease 0.2s both;
-  }
-
-  .hero-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(4rem, 12vw, 9rem);
-    font-weight: 900;
-    line-height: 0.9;
-    color: white;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
-    animation: fadeUp 1.2s ease 0.3s both;
-  }
-
-  .hero-title span {
-    color: var(--gold);
-    font-style: italic;
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.85);
-    margin-top: 1.5rem;
-    letter-spacing: 0.05em;
-    animation: fadeUp 1.2s ease 0.5s both;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--sunrise);
-    color: white;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.5rem 1.2rem;
-    border-radius: 999px;
-    margin-top: 2rem;
-    animation: fadeUp 1.2s ease 0.7s both;
-  }
-
-  /* Mountains SVG */
-  .mountain-svg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-  }
-
-  /* SCROLL ARROW */
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    color: rgba(255,255,255,0.6);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
-  }
-
-  .scroll-arrow { font-size: 1.2rem; }
-
-  /* TRIP INFO STRIP */
-  .info-strip {
-    background: var(--gold);
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: var(--pine);
-  }
-
-  .info-item .icon { font-size: 1.2rem; }
-
-  /* SECTIONS */
-  section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 5rem 2rem;
-  }
-
-  .section-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--forest);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--pine);
-    margin-bottom: 2rem;
-  }
-
-  /* LOGISTICS */
-  .logistics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
-
-  .logistics-card {
-    background: white;
-    border-radius: 1.5rem;
-    padding: 1.8rem;
-    border: 2px solid transparent;
-    transition: border-color 0.3s, transform 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .logistics-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 4px;
-    background: var(--glacier);
-  }
-
-  .logistics-card:nth-child(2)::before { background: var(--sunrise); }
-  .logistics-card:nth-child(3)::before { background: var(--gold); }
-  .logistics-card:nth-child(4)::before { background: var(--forest); }
-
-  .logistics-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--mist);
-  }
-
-  .logistics-card .card-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .logistics-card h3 {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--bark);
-    margin-bottom: 0.5rem;
-  }
-  .logistics-card p {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--pine);
-    line-height: 1.4;
-  }
-  .logistics-card .note {
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 0.5rem;
-    font-weight: 300;
-  }
-
-  /* DIVIDER */
-  .divider {
-    border: none;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--mist), transparent);
-    margin: 0;
-  }
-
-  /* ITINERARY */
-  .itinerary-section {
-    background: var(--pine);
-    color: white;
-    max-width: 100%;
-    padding: 5rem 2rem;
-  }
-
-  .itinerary-inner {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .itinerary-section .section-label { color: var(--gold); }
-  .itinerary-section .section-title { color: white; }
-
-  .days-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .day-card {
-    background: rgba(255,255,255,0.06);
-    border-radius: 1.5rem;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: transform 0.3s;
-  }
-
-  .day-card:hover { transform: translateX(6px); }
-
-  .day-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem 2rem;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .day-number {
-    font-family: 'Fraunces', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--gold);
-    opacity: 0.4;
-    min-width: 3rem;
-  }
-
-  .day-info h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 0.25rem;
-  }
-
-  .day-info .day-date {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .day-emoji {
-    margin-left: auto;
-    font-size: 2rem;
-  }
-
-  .day-body {
-    padding: 0 2rem 2rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
-  .activities {
-    list-style: none;
-    margin-top: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .activity {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 0.8rem 1rem;
-    background: rgba(255,255,255,0.04);
-    border-radius: 0.75rem;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.85);
-    line-height: 1.4;
-  }
-
-  .activity .time {
-    font-size: 0.72rem;
-    color: var(--glacier);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    padding-top: 0.15rem;
-    min-width: 4.5rem;
-    font-weight: 500;
-  }
-
-  .activity.highlight {
-    background: rgba(244,132,95,0.15);
-    border: 1px solid rgba(244,132,95,0.3);
-  }
-
-  .activity.highlight .time { color: var(--sunrise); }
-
-  .activity-icon { font-size: 1.1rem; min-width: 1.5rem; }
-
-  /* PACKING */
-  .packing-section { background: var(--mist); max-width: 100%; padding: 5rem 2rem; }
-  .packing-inner { max-width: 900px; margin: 0 auto; }
-
-  .packing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
-
-  .packing-category {
-    background: white;
-    border-radius: 1.2rem;
-    padding: 1.5rem;
-  }
-
-  .packing-category h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    color: var(--pine);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .packing-category ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .packing-category li {
-    font-size: 0.88rem;
-    color: #555;
-    padding-left: 1.2rem;
-    position: relative;
-  }
-
-  .packing-category li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--glacier);
-    font-size: 1.2rem;
-    line-height: 1;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--pine);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 2.5rem;
-    font-size: 0.85rem;
-  }
-
-  footer span { color: var(--gold); font-style: italic; }
-
-  /* HIKES SECTION */
-  .hikes-section {
-    background: var(--snow);
-    padding: 5rem 2rem;
-  }
-
-  .hikes-inner {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .hikes-intro {
-    font-size: 1.05rem;
-    color: #555;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    line-height: 1.6;
-  }
-
-  .hike-card {
-    background: white;
-    border-radius: 1.5rem;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    border: 1px solid #e8e8e8;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .hike-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-  }
-
-  .hike-header {
-    padding: 2rem 2rem 1.5rem;
-    border-bottom: 1px solid #f0f0f0;
-    background: linear-gradient(135deg, #f9f5ef 0%, #e8f4f0 100%);
-  }
-
-  .hike-meta-top {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .hike-tag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--mist);
-    color: var(--forest);
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-    border: 1px solid rgba(45,90,61,0.15);
-  }
-
-  .hike-tag.sunrise-tag {
-    background: rgba(244,132,95,0.12);
-    color: var(--sunrise);
-    border-color: rgba(244,132,95,0.3);
-  }
-
-  .difficulty-badge {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-  }
-
-  .difficulty-badge.easy { background: #dcfce7; color: #166534; }
-  .difficulty-badge.moderate { background: #fef9c3; color: #854d0e; }
-  .difficulty-badge.hard { background: #fee2e2; color: #991b1b; }
-
-  .hike-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--pine);
-    margin-bottom: 0.3rem;
-  }
-
-  .hike-location {
-    font-size: 0.85rem;
-    color: #888;
-    font-weight: 400;
-  }
-
-  .hike-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-bottom: 1px solid #f0f0f0;
-  }
-
-  .stat {
-    padding: 1.2rem 1.5rem;
-    border-right: 1px solid #f0f0f0;
-    text-align: center;
-  }
-
-  .stat:last-child { border-right: none; }
-
-  .stat-val {
-    font-family: 'Fraunces', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--pine);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .stat-label {
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #aaa;
-    font-weight: 500;
-  }
-
-  .hike-body {
-    padding: 2rem;
-  }
-
-  .hike-desc {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 2rem;
-  }
-
-  .hike-sections {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  @media (max-width: 640px) {
-    .hike-sections { grid-template-columns: 1fr; }
-    .hike-stats { grid-template-columns: repeat(2, 1fr); }
-    .stat:nth-child(2) { border-right: none; }
-    .stat:nth-child(3) { border-top: 1px solid #f0f0f0; }
-    .stat:nth-child(4) { border-top: 1px solid #f0f0f0; }
-  }
-
-  .hike-detail-block {
-    background: #fafafa;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    border: 1px solid #efefef;
-  }
-
-  .hike-detail-block h4 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--pine);
-    margin-bottom: 1rem;
-  }
-
-  .hike-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .hike-list li {
-    font-size: 0.85rem;
-    line-height: 1.5;
-    color: #555;
-    padding-left: 1.1rem;
-    position: relative;
-  }
-
-  .hike-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--glacier);
-    font-size: 0.75rem;
-  }
-
-  .hike-list li strong { color: var(--pine); }
-
-  /* RESPONSIVE */
-  @media (max-width: 600px) {
-    .info-strip { gap: 1.2rem; }
-    .day-header { padding: 1.2rem 1.5rem; }
-    .day-body { padding: 0 1.5rem 1.5rem; }
-  }
+:root {
+  --pine: #1a3a2a;
+  --forest: #2d5a3d;
+  --glacier: #4a9eba;
+  --sky: #a8d8ea;
+  --sunrise: #f4845f;
+  --gold: #f5c842;
+  --snow: #f9f5ef;
+  --bark: #8b5e3c;
+  --mist: #e8f4f0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--snow); color: var(--pine); overflow-x: hidden; }
+
+/* STICKY NAV */
+.sticky-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(26,58,42,0.97); backdrop-filter: blur(10px);
+  padding: 0 1.5rem; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  transform: translateY(-100%); transition: transform 0.35s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sticky-nav.visible { transform: translateY(0); }
+.nav-logo { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; color: var(--gold); font-style: italic; white-space: nowrap; margin-right: 1rem; }
+.nav-links { display: flex; gap: 0.15rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.6rem; border-radius: 999px; white-space: nowrap; transition: all 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,0.12); }
+
+/* HERO */
+.hero { min-height: 100vh; background: var(--pine); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding: 2rem; }
+.hero-sky { position: absolute; inset: 0; background: linear-gradient(180deg, #0d1f2d 0%, #1a3a5c 30%, #c45c2e 60%, #f4845f 75%, #f9c46b 85%, #a8d8ea 100%); opacity: 0.85; }
+.hero-stars { position: absolute; top: 0; left: 0; width: 100%; height: 50%; }
+.star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 0%,100%{opacity:0.3} 50%{opacity:1} }
+.hero-content { position: relative; z-index: 10; text-align: center; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+.hero-eyebrow { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; animation: fadeUp 1.2s ease 0.2s both; }
+.hero-title { font-family: 'Fraunces', serif; font-size: clamp(4rem, 12vw, 9rem); font-weight: 900; line-height: 0.9; color: white; text-shadow: 0 4px 30px rgba(0,0,0,0.4); animation: fadeUp 1.2s ease 0.3s both; }
+.hero-title span { color: var(--gold); font-style: italic; }
+.hero-subtitle { font-size: 1.1rem; color: rgba(255,255,255,0.85); margin-top: 1.5rem; letter-spacing: 0.05em; animation: fadeUp 1.2s ease 0.5s both; }
+.hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--sunrise); color: white; font-size: 0.85rem; font-weight: 500; padding: 0.5rem 1.2rem; border-radius: 999px; margin-top: 2rem; animation: fadeUp 1.2s ease 0.7s both; }
+.mountain-svg { position: absolute; bottom: 0; left: 0; width: 100%; height: auto; }
+.scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 10; color: rgba(255,255,255,0.6); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; animation: bounce 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+/* INFO STRIP */
+.info-strip { background: var(--gold); padding: 1.2rem 2rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+.info-item { display: flex; align-items: center; gap: 0.6rem; font-weight: 500; font-size: 0.9rem; color: var(--pine); }
+.info-item .icon { font-size: 1.2rem; }
+
+/* SHARED */
+.section-label { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--forest); font-weight: 500; margin-bottom: 0.75rem; }
+.section-title { font-family: 'Fraunces', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; color: var(--pine); margin-bottom: 2rem; }
+.divider { border: none; height: 2px; background: linear-gradient(90deg, transparent, var(--mist), transparent); margin: 0; }
+
+/* LOGISTICS */
+#logistics { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; }
+.logistics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.logistics-card { background: white; border-radius: 1.5rem; padding: 1.8rem; border: 2px solid transparent; transition: all 0.3s; position: relative; overflow: hidden; }
+.logistics-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--glacier); }
+.logistics-card:nth-child(2)::before { background: var(--sunrise); }
+.logistics-card:nth-child(3)::before { background: var(--gold); }
+.logistics-card:nth-child(4)::before { background: var(--forest); }
+.logistics-card:hover { transform: translateY(-4px); border-color: var(--mist); }
+.logistics-card .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+.logistics-card h3 { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bark); margin-bottom: 0.5rem; }
+.logistics-card p { font-size: 1rem; font-weight: 500; color: var(--pine); line-height: 1.4; }
+.logistics-card .note { font-size: 0.8rem; color: #888; margin-top: 0.5rem; font-weight: 300; }
+
+/* ITINERARY */
+.itinerary-section { background: var(--pine); color: white; padding: 5rem 2rem; }
+.itinerary-inner { max-width: 900px; margin: 0 auto; }
+.itinerary-section .section-label { color: var(--gold); }
+.itinerary-section .section-title { color: white; }
+.days-container { display: flex; flex-direction: column; gap: 2rem; margin-top: 3rem; }
+.day-card { background: rgba(255,255,255,0.06); border-radius: 1.5rem; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s; }
+.day-card:hover { transform: translateX(6px); }
+.day-header { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 2rem; }
+.day-number { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 900; line-height: 1; color: var(--gold); opacity: 0.4; min-width: 3rem; }
+.day-info h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 0.25rem; }
+.day-info .day-date { font-size: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; }
+.day-emoji { margin-left: auto; font-size: 2rem; }
+.day-body { padding: 0 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+.activities { list-style: none; margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.activity { display: flex; align-items: flex-start; gap: 1rem; padding: 0.8rem 1rem; background: rgba(255,255,255,0.04); border-radius: 0.75rem; font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.4; }
+.activity .time { font-size: 0.72rem; color: var(--glacier); letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap; padding-top: 0.15rem; min-width: 4.5rem; font-weight: 500; }
+.activity.highlight { background: rgba(244,132,95,0.15); border: 1px solid rgba(244,132,95,0.3); }
+.activity.highlight .time { color: var(--sunrise); }
+.activity-icon { font-size: 1.1rem; min-width: 1.5rem; }
+
+/* HIKES */
+.hikes-section { background: var(--snow); padding: 5rem 2rem; }
+.hikes-inner { max-width: 900px; margin: 0 auto; }
+.hikes-intro { font-size: 1.05rem; color: #555; margin-bottom: 3rem; max-width: 600px; line-height: 1.6; }
+.hike-card { background: white; border-radius: 1.5rem; overflow: hidden; margin-bottom: 2rem; border: 1px solid #e8e8e8; transition: all 0.3s; }
+.hike-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.hike-header { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid #f0f0f0; background: linear-gradient(135deg, #f9f5ef 0%, #e8f4f0 100%); }
+.hike-meta-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.hike-tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--mist); color: var(--forest); padding: 0.3rem 0.8rem; border-radius: 999px; border: 1px solid rgba(45,90,61,0.15); }
+.hike-tag.sunrise-tag { background: rgba(244,132,95,0.12); color: var(--sunrise); border-color: rgba(244,132,95,0.3); }
+.difficulty-badge { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 999px; }
+.difficulty-badge.easy { background: #dcfce7; color: #166534; }
+.difficulty-badge.moderate { background: #fef9c3; color: #854d0e; }
+.difficulty-badge.hard { background: #fee2e2; color: #991b1b; }
+.hike-name { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--pine); margin-bottom: 0.3rem; }
+.hike-location { font-size: 0.85rem; color: #888; }
+.hike-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid #f0f0f0; }
+.stat { padding: 1.2rem 1.5rem; border-right: 1px solid #f0f0f0; text-align: center; }
+.stat:last-child { border-right: none; }
+.stat-val { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; color: var(--pine); line-height: 1; margin-bottom: 0.3rem; }
+.stat-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; font-weight: 500; }
+.hike-body { padding: 2rem; }
+.hike-desc { font-size: 0.95rem; line-height: 1.7; color: #555; margin-bottom: 2rem; }
+.hike-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.hike-detail-block { background: #fafafa; border-radius: 1rem; padding: 1.5rem; border: 1px solid #efefef; }
+.hike-detail-block h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pine); margin-bottom: 1rem; }
+.hike-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.hike-list li { font-size: 0.85rem; line-height: 1.5; color: #555; padding-left: 1.1rem; position: relative; }
+.hike-list li::before { content: '→'; position: absolute; left: 0; color: var(--glacier); font-size: 0.75rem; }
+.hike-list li strong { color: var(--pine); }
+
+/* MAP */
+.map-section { background: var(--pine); padding: 5rem 2rem; }
+.map-inner { max-width: 900px; margin: 0 auto; }
+.map-section .section-label { color: var(--gold); }
+.map-section .section-title { color: white; }
+.map-container { border-radius: 1.5rem; overflow: hidden; border: 3px solid rgba(255,255,255,0.1); margin-top: 2rem; }
+.map-container iframe { width: 100%; height: 460px; border: none; display: block; }
+.map-pins { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.map-pin { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 1rem; padding: 1rem 1.2rem; display: flex; align-items: flex-start; gap: 0.75rem; }
+.pin-icon { font-size: 1.4rem; }
+.pin-info h4 { font-size: 0.85rem; font-weight: 600; color: white; margin-bottom: 0.2rem; }
+.pin-info p { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+
+/* FOOD */
+.food-section { background: var(--snow); padding: 5rem 2rem; }
+.food-inner { max-width: 900px; margin: 0 auto; }
+.food-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.food-tab { padding: 0.5rem 1.2rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; cursor: pointer; border: 2px solid #e0e0e0; background: white; color: #888; transition: all 0.2s; user-select: none; }
+.food-tab.active { background: var(--pine); color: white; border-color: var(--pine); }
+.food-panel { display: none; }
+.food-panel.active { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.restaurant-card { background: white; border-radius: 1.2rem; padding: 1.5rem; border: 1px solid #efefef; transition: all 0.2s; }
+.restaurant-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+.restaurant-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+.restaurant-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--pine); }
+.restaurant-price { font-size: 0.8rem; font-weight: 600; color: var(--forest); background: var(--mist); padding: 0.2rem 0.6rem; border-radius: 999px; }
+.restaurant-location { font-size: 0.75rem; color: #999; margin-bottom: 0.6rem; }
+.restaurant-desc { font-size: 0.85rem; line-height: 1.5; color: #555; }
+.restaurant-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.8rem; }
+.rtag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.05em; background: #f3f3f3; color: #666; padding: 0.2rem 0.6rem; border-radius: 999px; }
+
+/* WEATHER */
+.weather-section { background: var(--mist); padding: 5rem 2rem; }
+.weather-inner { max-width: 900px; margin: 0 auto; }
+.weather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.weather-card { background: white; border-radius: 1.2rem; padding: 1.5rem; text-align: center; border: 1px solid #e5eeec; transition: transform 0.2s; }
+.weather-card:hover { transform: translateY(-3px); }
+.weather-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.weather-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bark); margin-bottom: 0.4rem; }
+.weather-val { font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 700; color: var(--pine); margin-bottom: 0.4rem; }
+.weather-note { font-size: 0.8rem; color: #777; line-height: 1.4; }
+.weather-tips { margin-top: 2.5rem; background: white; border-radius: 1.2rem; padding: 2rem; border: 1px solid #e5eeec; }
+.weather-tips h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; color: var(--pine); margin-bottom: 1.2rem; }
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.tip-item { display: flex; align-items: flex-start; gap: 0.75rem; }
+.tip-icon { font-size: 1.3rem; min-width: 1.8rem; }
+.tip-text { font-size: 0.85rem; line-height: 1.5; color: #555; }
+.tip-text strong { color: var(--pine); display: block; margin-bottom: 0.1rem; font-size: 0.82rem; }
+
+/* BUDGET */
+.budget-section { background: var(--pine); padding: 5rem 2rem; }
+.budget-inner { max-width: 900px; margin: 0 auto; }
+.budget-section .section-label { color: var(--gold); }
+.budget-section .section-title { color: white; }
+.budget-note { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 2.5rem; font-style: italic; }
+.budget-table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.05); border-radius: 1.2rem; overflow: hidden; margin-bottom: 2rem; }
+.budget-table th { background: rgba(255,255,255,0.1); color: var(--gold); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 1rem 1.5rem; text-align: left; font-weight: 600; }
+.budget-table td { padding: 0.9rem 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8); border-top: 1px solid rgba(255,255,255,0.06); }
+.budget-table tr:hover td { background: rgba(255,255,255,0.04); }
+.budget-table td:last-child { font-weight: 600; color: white; text-align: right; }
+.budget-table th:last-child { text-align: right; }
+.budget-table .total-row td { background: rgba(245,200,66,0.15); color: var(--gold); font-weight: 700; font-size: 1rem; border-top: 2px solid rgba(245,200,66,0.3); }
+.budget-table .category-row td { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 1.2rem 1.5rem 0.4rem; background: transparent; }
+.budget-disclaimer { font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.6; font-style: italic; }
+
+/* CHECKLIST */
+.checklist-section { background: var(--snow); padding: 5rem 2rem; }
+.checklist-inner { max-width: 900px; margin: 0 auto; }
+.checklist-intro { font-size: 1rem; color: #555; margin-bottom: 2.5rem; line-height: 1.6; }
+.timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 5.5rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--glacier), var(--forest)); opacity: 0.3; }
+.timeline-group { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+.timeline-label { min-width: 4.5rem; text-align: right; padding-top: 0.2rem; position: relative; flex-shrink: 0; }
+.timeline-label::after { content: ''; position: absolute; right: -1.95rem; top: 0.55rem; width: 10px; height: 10px; border-radius: 50%; background: var(--glacier); border: 2px solid var(--snow); z-index: 1; }
+.timeline-label span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bark); }
+.timeline-tasks { flex: 1; padding-left: 1rem; }
+.checklist-items { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.checklist-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.85rem 1rem; background: white; border-radius: 0.75rem; border: 1px solid #efefef; cursor: pointer; transition: background 0.15s; user-select: none; }
+.checklist-item:hover { background: #fafafa; }
+.checklist-item.checked { opacity: 0.5; }
+.checklist-item.checked .check-text { text-decoration: line-through; color: #bbb; }
+.check-box { width: 18px; height: 18px; border: 2px solid #ddd; border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: all 0.15s; font-size: 0.7rem; color: white; }
+.checklist-item.checked .check-box { background: var(--forest); border-color: var(--forest); }
+.check-text { font-size: 0.88rem; color: var(--pine); line-height: 1.4; flex: 1; }
+.check-text strong { font-weight: 600; }
+.check-sub { font-size: 0.75rem; color: #999; margin-top: 0.1rem; display: block; }
+.urgent-tag { font-size: 0.65rem; font-weight: 700; background: #fee2e2; color: #991b1b; padding: 0.15rem 0.5rem; border-radius: 999px; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
+
+/* PACKING */
+.packing-section { background: var(--mist); padding: 5rem 2rem; }
+.packing-inner { max-width: 900px; margin: 0 auto; }
+.packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+.packing-category { background: white; border-radius: 1.2rem; padding: 1.5rem; }
+.packing-category h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; color: var(--pine); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.packing-category ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.packing-category li { font-size: 0.88rem; color: #555; padding-left: 1.2rem; position: relative; }
+.packing-category li::before { content: '·'; position: absolute; left: 0; color: var(--glacier); font-size: 1.2rem; line-height: 1; }
+
+footer { background: var(--pine); color: rgba(255,255,255,0.5); text-align: center; padding: 2.5rem; font-size: 0.85rem; }
+footer span { color: var(--gold); font-style: italic; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .hike-sections { grid-template-columns: 1fr; }
+  .hike-stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid #f0f0f0; }
+  .info-strip { gap: 1.2rem; }
+  .day-header { padding: 1.2rem 1.5rem; }
+  .day-body { padding: 0 1.5rem 1.5rem; }
+  .budget-table th, .budget-table td { padding: 0.75rem 0.75rem; font-size: 0.78rem; }
+  .timeline::before { left: 4rem; }
+  .timeline-label { min-width: 3rem; }
+  .timeline-label span { font-size: 0.6rem; }
+}
+
+/* PRINT */
+@media print {
+  .sticky-nav, .scroll-hint, .hero-stars, .food-tabs { display: none !important; }
+  * { animation: none !important; transition: none !important; }
+  body { background: white; color: black; font-size: 11pt; }
+  .hero { min-height: auto; background: var(--pine) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 2rem; page-break-after: always; }
+  .hero-title { font-size: 3rem; }
+  .info-strip { background: #f5c842 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  #logistics, .hikes-section, .food-section, .weather-section, .checklist-section, .packing-section { padding: 2rem 1rem; }
+  .day-card, .hike-card, .logistics-card, .restaurant-card, .weather-card, .packing-category, .timeline-group { break-inside: avoid; }
+  .itinerary-section, .budget-section, .map-section, footer { background: #1a3a2a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .map-section { display: none; }
+  .food-panel { display: grid !important; }
+}
 </style>
 </head>
 <body>
 
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="stickyNav">
+  <div class="nav-logo">Banff '26</div>
+  <div class="nav-links">
+    <a href="#logistics">Logistics</a>
+    <a href="#itinerary">Itinerary</a>
+    <a href="#hikes">Hikes</a>
+    <a href="#map">Map</a>
+    <a href="#food">Food</a>
+    <a href="#weather">Weather</a>
+    <a href="#budget">Budget</a>
+    <a href="#checklist">Checklist</a>
+    <a href="#packing">Packing</a>
+  </div>
+</nav>
+
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="top">
   <div class="hero-sky"></div>
   <div class="hero-stars" id="stars"></div>
-
-  <!-- Mountain silhouette SVG -->
   <svg class="mountain-svg" viewBox="0 0 1440 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <polygon points="0,300 200,100 400,220 600,60 800,180 1000,80 1200,200 1440,120 1440,300" fill="rgba(26,58,42,0.9)"/>
     <polygon points="0,300 150,140 350,250 550,90 700,200 900,100 1100,220 1300,130 1440,180 1440,300" fill="rgba(13,25,18,0.95)"/>
-    <!-- Snow caps -->
     <polygon points="580,60 610,100 550,100" fill="rgba(249,245,239,0.7)"/>
     <polygon points="980,80 1010,115 950,115" fill="rgba(249,245,239,0.6)"/>
     <polygon points="185,100 210,130 160,130" fill="rgba(249,245,239,0.5)"/>
   </svg>
-
   <div class="hero-content">
     <div class="hero-eyebrow">The Adventure Awaits</div>
     <div class="hero-title">Banff<br><span>National Park</span></div>
-    <div class="hero-subtitle">June 25 – 30, 2026 &nbsp;·&nbsp; 5 Days &nbsp;·&nbsp; 4 Nights</div>
+    <div class="hero-subtitle">June 18 – 22, 2026 &nbsp;·&nbsp; 5 Days &nbsp;·&nbsp; 4 Nights</div>
     <div class="hero-badge">🏔️ Alberta, Canada</div>
   </div>
-
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <span class="scroll-arrow">↓</span>
-  </div>
+  <div class="scroll-hint"><span>Scroll</span><span>↓</span></div>
 </div>
 
 <!-- INFO STRIP -->
@@ -687,270 +305,86 @@
   <div class="info-item"><span class="icon">✈️</span> Fly into Calgary (YYC)</div>
   <div class="info-item"><span class="icon">🏡</span> Home base: Canmore, AB</div>
   <div class="info-item"><span class="icon">👥</span> Small group (3–6 people)</div>
-  <div class="info-item"><span class="icon">📅</span> June 25–30, 2026</div>
+  <div class="info-item"><span class="icon">📅</span> June 18–22, 2026</div>
 </div>
 
 <!-- LOGISTICS -->
-<section>
+<section id="logistics">
   <div class="section-label">Trip Info</div>
-  <div class="section-title">Getting There<br>& Staying Put</div>
-
+  <div class="section-title">Getting There & Staying Put</div>
   <div class="logistics-grid">
-    <div class="logistics-card">
-      <div class="card-icon">✈️</div>
-      <h3>Arrival</h3>
-      <p>Fly into Calgary International (YYC)</p>
-      <p class="note">Arrive by noon on June 25 — drive together to Canmore (~1 hr on Hwy 1)</p>
-    </div>
-    <div class="logistics-card">
-      <div class="card-icon">🚗</div>
-      <h3>Transport</h3>
-      <p>Rent a car or SUV in Calgary</p>
-      <p class="note">Canmore is a perfect base — 15 min to Banff, 45 min to Lake Louise, right on the Rockies doorstep</p>
-    </div>
-    <div class="logistics-card">
-      <div class="card-icon">🏡</div>
-      <h3>Home Base: Canmore</h3>
-      <p>Airbnb or vacation rental in Canmore</p>
-      <p class="note">Book early — June fills fast! Canmore is quieter & cheaper than Banff with the same stunning views</p>
-    </div>
-    <div class="logistics-card">
-      <div class="card-icon">🅿️</div>
-      <h3>Park Pass</h3>
-      <p>Parks Canada Discovery Pass</p>
-      <p class="note">Required every time you enter Banff National Park — buy online before you go</p>
-    </div>
+    <div class="logistics-card"><div class="card-icon">✈️</div><h3>Arrival</h3><p>Fly into Calgary International (YYC)</p><p class="note">Arrive by noon on June 18 — drive together to Canmore (~1 hr on Hwy 1)</p></div>
+    <div class="logistics-card"><div class="card-icon">🚗</div><h3>Transport</h3><p>Rent a car or SUV in Calgary</p><p class="note">Canmore is a perfect base — 15 min to Banff, 45 min to Lake Louise, right on the Rockies doorstep</p></div>
+    <div class="logistics-card"><div class="card-icon">🏡</div><h3>Home Base: Canmore</h3><p>Airbnb or vacation rental in Canmore</p><p class="note">Book early — June fills fast! Canmore is quieter & cheaper than Banff with the same stunning views</p></div>
+    <div class="logistics-card"><div class="card-icon">🅿️</div><h3>Park Pass</h3><p>Parks Canada Discovery Pass</p><p class="note">Required every time you enter Banff National Park — buy online before you go</p></div>
   </div>
 </section>
 
 <hr class="divider">
 
 <!-- ITINERARY -->
-<div class="itinerary-section">
+<div class="itinerary-section" id="itinerary">
   <div class="itinerary-inner">
     <div class="section-label">Day by Day</div>
     <div class="section-title">The Itinerary</div>
-
     <div class="days-container">
 
-      <!-- DAY 1 -->
       <div class="day-card">
-        <div class="day-header">
-          <div class="day-number">01</div>
-          <div class="day-info">
-            <h3>Arrive & Explore</h3>
-            <div class="day-date">Thursday · June 25</div>
-          </div>
-          <div class="day-emoji">🛬</div>
-        </div>
-        <div class="day-body">
-          <ul class="activities">
-            <li class="activity">
-              <span class="time">Noon</span>
-              <span class="activity-icon">✈️</span>
-              <span>Land at Calgary YYC — pick up rental car and grab lunch near the airport</span>
-            </li>
-            <li class="activity">
-              <span class="time">2:00 PM</span>
-              <span class="activity-icon">🚗</span>
-              <span>Scenic drive to Banff along the Trans-Canada Highway — first Rockies views!</span>
-            </li>
-            <li class="activity">
-              <span class="time">3:30 PM</span>
-              <span class="activity-icon">🏡</span>
-              <span>Check in to Canmore accommodation, drop bags, settle in</span>
-            </li>
-            <li class="activity">
-              <span class="time">4:30 PM</span>
-              <span class="activity-icon">🦌</span>
-              <span>Explore Canmore's Main Street — grab groceries & supplies for the week at the IGA</span>
-            </li>
-            <li class="activity">
-              <span class="time">7:00 PM</span>
-              <span class="activity-icon">🍽️</span>
-              <span>Dinner in Canmore — try Tavern 1883 or The Trough for a warm welcome dinner</span>
-            </li>
-            <li class="activity">
-              <span class="time">Evening</span>
-              <span class="activity-icon">🌌</span>
-              <span>Early night — big hike tomorrow!</span>
-            </li>
-          </ul>
-        </div>
+        <div class="day-header"><div class="day-number">01</div><div class="day-info"><h3>Arrive & Explore</h3><div class="day-date">Thursday · June 18</div></div><div class="day-emoji">🛬</div></div>
+        <div class="day-body"><ul class="activities">
+          <li class="activity"><span class="time">Noon</span><span class="activity-icon">✈️</span><span>Land at Calgary YYC — pick up rental car and grab lunch near the airport</span></li>
+          <li class="activity"><span class="time">2:00 PM</span><span class="activity-icon">🚗</span><span>Scenic drive to Canmore along the Trans-Canada Highway — first Rockies views!</span></li>
+          <li class="activity"><span class="time">3:30 PM</span><span class="activity-icon">🏡</span><span>Check in to Canmore accommodation, drop bags, settle in</span></li>
+          <li class="activity"><span class="time">4:30 PM</span><span class="activity-icon">🛍️</span><span>Explore Canmore's Main Street — grab groceries & supplies at the IGA for the week</span></li>
+          <li class="activity"><span class="time">7:00 PM</span><span class="activity-icon">🍽️</span><span>Welcome dinner in Canmore — Tavern 1883 or The Trough</span></li>
+          <li class="activity"><span class="time">Evening</span><span class="activity-icon">🌌</span><span>Early night — big sunrise hike tomorrow!</span></li>
+        </ul></div>
       </div>
 
-      <!-- DAY 2 -->
       <div class="day-card">
-        <div class="day-header">
-          <div class="day-number">02</div>
-          <div class="day-info">
-            <h3>Sunrise on Ha Ling Peak</h3>
-            <div class="day-date">Friday · June 26</div>
-          </div>
-          <div class="day-emoji">🌅</div>
-        </div>
-        <div class="day-body">
-          <ul class="activities">
-            <li class="activity highlight">
-              <span class="time">4:30 AM</span>
-              <span class="activity-icon">⏰</span>
-              <span>Wake up early! Pack layers, headlamps, and snacks for the sunrise hike</span>
-            </li>
-            <li class="activity highlight">
-              <span class="time">5:15 AM</span>
-              <span class="activity-icon">🥾</span>
-              <span>Ha Ling Peak trailhead is right in Canmore — 5 min drive from home base. 7.8 km round trip, ~700m elevation gain</span>
-            </li>
-            <li class="activity highlight">
-              <span class="time">7:00 AM</span>
-              <span class="activity-icon">🌅</span>
-              <span>Watch the sunrise from the summit — panoramic views of the Bow Valley and Three Sisters</span>
-            </li>
-            <li class="activity">
-              <span class="time">9:00 AM</span>
-              <span class="activity-icon">🥞</span>
-              <span>Celebrate with a big brunch at Communitea Café in Canmore</span>
-            </li>
-            <li class="activity">
-              <span class="time">Afternoon</span>
-              <span class="activity-icon">💆</span>
-              <span>Relax afternoon — visit Banff Upper Hot Springs or just chill at the lodge</span>
-            </li>
-            <li class="activity">
-              <span class="time">Evening</span>
-              <span class="activity-icon">🍺</span>
-              <span>Dinner at Banff Ave Brewing Co. — local craft beers and casual vibes</span>
-            </li>
-          </ul>
-        </div>
+        <div class="day-header"><div class="day-number">02</div><div class="day-info"><h3>Sunrise on Ha Ling Peak</h3><div class="day-date">Friday · June 19</div></div><div class="day-emoji">🌅</div></div>
+        <div class="day-body"><ul class="activities">
+          <li class="activity highlight"><span class="time">4:30 AM</span><span class="activity-icon">⏰</span><span>Wake up! Bags should already be packed from the night before</span></li>
+          <li class="activity highlight"><span class="time">5:15 AM</span><span class="activity-icon">🥾</span><span>Ha Ling Peak trailhead — 5 min drive from home. 7.8 km round trip, ~700m elevation gain</span></li>
+          <li class="activity highlight"><span class="time">7:00 AM</span><span class="activity-icon">🌅</span><span>Sunrise from the summit — panoramic views of the Bow Valley and Three Sisters</span></li>
+          <li class="activity"><span class="time">9:00 AM</span><span class="activity-icon">🥞</span><span>Celebratory brunch at Communitea Café in Canmore</span></li>
+          <li class="activity"><span class="time">Afternoon</span><span class="activity-icon">♨️</span><span>Rest up — visit Banff Upper Hot Springs or chill at the Airbnb</span></li>
+          <li class="activity"><span class="time">7:00 PM</span><span class="activity-icon">🍺</span><span>Dinner at Grizzly Paw Brewing Co. — Canmore's iconic craft brewery</span></li>
+        </ul></div>
       </div>
 
-      <!-- DAY 3 -->
       <div class="day-card">
-        <div class="day-header">
-          <div class="day-number">03</div>
-          <div class="day-info">
-            <h3>Lakes & Icefields</h3>
-            <div class="day-date">Saturday · June 27</div>
-          </div>
-          <div class="day-emoji">🏔️</div>
-        </div>
-        <div class="day-body">
-          <ul class="activities">
-            <li class="activity">
-              <span class="time">7:30 AM</span>
-              <span class="activity-icon">🚗</span>
-              <span>Drive the Icefields Parkway (Hwy 93 N) — one of the world's most scenic drives</span>
-            </li>
-            <li class="activity">
-              <span class="time">8:30 AM</span>
-              <span class="activity-icon">💎</span>
-              <span>Peyto Lake viewpoint — surreal turquoise lake shaped like a wolf's head</span>
-            </li>
-            <li class="activity">
-              <span class="time">10:00 AM</span>
-              <span class="activity-icon">🧊</span>
-              <span>Columbia Icefield — walk on the Athabasca Glacier or take the Ice Explorer tour</span>
-            </li>
-            <li class="activity">
-              <span class="time">1:00 PM</span>
-              <span class="activity-icon">🥪</span>
-              <span>Packed lunch with glacier views — best picnic ever</span>
-            </li>
-            <li class="activity">
-              <span class="time">3:00 PM</span>
-              <span class="activity-icon">🌊</span>
-              <span>Stop at Bow Lake on the return drive — short walk to the lakeshore</span>
-            </li>
-            <li class="activity">
-              <span class="time">7:00 PM</span>
-              <span class="activity-icon">🍷</span>
-              <span>Nice dinner back in Banff — Saltlik Steakhouse for a special night</span>
-            </li>
-          </ul>
-        </div>
+        <div class="day-header"><div class="day-number">03</div><div class="day-info"><h3>Lakes & Icefields</h3><div class="day-date">Saturday · June 20</div></div><div class="day-emoji">🏔️</div></div>
+        <div class="day-body"><ul class="activities">
+          <li class="activity"><span class="time">7:30 AM</span><span class="activity-icon">🚗</span><span>Drive the Icefields Parkway (Hwy 93 N) — one of the world's most scenic drives</span></li>
+          <li class="activity"><span class="time">8:30 AM</span><span class="activity-icon">💎</span><span>Peyto Lake & Bow Summit Lookout — neon turquoise lake shaped like a wolf's head</span></li>
+          <li class="activity"><span class="time">10:00 AM</span><span class="activity-icon">🧊</span><span>Columbia Icefield — walk on the Athabasca Glacier or take the Ice Explorer tour</span></li>
+          <li class="activity"><span class="time">1:00 PM</span><span class="activity-icon">🥪</span><span>Packed lunch with glacier views — best picnic of your life</span></li>
+          <li class="activity"><span class="time">3:00 PM</span><span class="activity-icon">🌊</span><span>Bow Lake stop on the return — short walk to the turquoise lakeshore</span></li>
+          <li class="activity"><span class="time">7:00 PM</span><span class="activity-icon">🍷</span><span>Dinner at Rustica or The Trough in Canmore — well deserved after a big day</span></li>
+        </ul></div>
       </div>
 
-      <!-- DAY 4 -->
       <div class="day-card">
-        <div class="day-header">
-          <div class="day-number">04</div>
-          <div class="day-info">
-            <h3>Lake Louise & Moraine</h3>
-            <div class="day-date">Sunday · June 28</div>
-          </div>
-          <div class="day-emoji">🏞️</div>
-        </div>
-        <div class="day-body">
-          <ul class="activities">
-            <li class="activity">
-              <span class="time">6:30 AM</span>
-              <span class="activity-icon">🚗</span>
-              <span>Early start to beat the crowds at Moraine Lake — shuttle or drive by 7 AM</span>
-            </li>
-            <li class="activity">
-              <span class="time">7:00 AM</span>
-              <span class="activity-icon">🌄</span>
-              <span>Moraine Lake Rockpile Trail — 10 min walk for one of the most photographed views in Canada</span>
-            </li>
-            <li class="activity">
-              <span class="time">9:00 AM</span>
-              <span class="activity-icon">💙</span>
-              <span>Lake Louise stroll — walk the lakeshore, admire the Victoria Glacier, grab tea at the Fairmont</span>
-            </li>
-            <li class="activity">
-              <span class="time">11:30 AM</span>
-              <span class="activity-icon">🥾</span>
-              <span>Plain of Six Glaciers Trail (optional) — stunning high alpine hike from Lake Louise</span>
-            </li>
-            <li class="activity">
-              <span class="time">Afternoon</span>
-              <span class="activity-icon">🛶</span>
-              <span>Rent a canoe on Lake Louise — nothing beats paddling under the glacier</span>
-            </li>
-            <li class="activity">
-              <span class="time">Evening</span>
-              <span class="activity-icon">🌃</span>
-              <span>Back to Canmore for dinner and an evening walk along the Bow River pathway</span>
-            </li>
-          </ul>
-        </div>
+        <div class="day-header"><div class="day-number">04</div><div class="day-info"><h3>Lake Louise & Moraine</h3><div class="day-date">Sunday · June 21</div></div><div class="day-emoji">🏞️</div></div>
+        <div class="day-body"><ul class="activities">
+          <li class="activity"><span class="time">6:30 AM</span><span class="activity-icon">🚗</span><span>Early start to Moraine Lake — shuttle or drive before 7 AM to beat the crowds</span></li>
+          <li class="activity"><span class="time">7:00 AM</span><span class="activity-icon">🌄</span><span>Moraine Lake Rockpile Trail — 20 min walk for the most photographed view in Canada</span></li>
+          <li class="activity"><span class="time">9:00 AM</span><span class="activity-icon">💙</span><span>Lake Louise lakeshore stroll — tea at the Fairmont, admire Victoria Glacier</span></li>
+          <li class="activity"><span class="time">11:30 AM</span><span class="activity-icon">🥾</span><span>Plain of Six Glaciers Trail (optional) — epic high alpine hike with historic teahouse</span></li>
+          <li class="activity"><span class="time">Afternoon</span><span class="activity-icon">🛶</span><span>Canoe on Lake Louise — paddling under the glacier is bucket-list worthy</span></li>
+          <li class="activity"><span class="time">Evening</span><span class="activity-icon">🌃</span><span>Back to Canmore — dinner and evening walk along the Bow River pathway</span></li>
+        </ul></div>
       </div>
 
-      <!-- DAY 5 -->
       <div class="day-card">
-        <div class="day-header">
-          <div class="day-number">05</div>
-          <div class="day-info">
-            <h3>Morning Farewell</h3>
-            <div class="day-date">Monday · June 30</div>
-          </div>
-          <div class="day-emoji">👋</div>
-        </div>
-        <div class="day-body">
-          <ul class="activities">
-            <li class="activity">
-              <span class="time">Early AM</span>
-              <span class="activity-icon">☀️</span>
-              <span>Early checkout — pack the night before to make morning smooth</span>
-            </li>
-            <li class="activity">
-              <span class="time">Morning</span>
-              <span class="activity-icon">☕</span>
-              <span>Quick coffee and pastry at Communitea Café or Rocky Mountain Bagel — Canmore's finest morning fuel</span>
-            </li>
-            <li class="activity">
-              <span class="time">Morning</span>
-              <span class="activity-icon">🚗</span>
-              <span>Drive back to Calgary YYC (~1 hr) — one last look at those mountains in the rear-view mirror</span>
-            </li>
-            <li class="activity">
-              <span class="time">En Route</span>
-              <span class="activity-icon">🛍️</span>
-              <span>Grab any last-minute Canmore souvenirs before hitting the highway</span>
-            </li>
-          </ul>
-        </div>
+        <div class="day-header"><div class="day-number">05</div><div class="day-info"><h3>Morning Farewell</h3><div class="day-date">Monday · June 22</div></div><div class="day-emoji">👋</div></div>
+        <div class="day-body"><ul class="activities">
+          <li class="activity"><span class="time">Early AM</span><span class="activity-icon">☀️</span><span>Early checkout — pack bags the night before to keep the morning smooth</span></li>
+          <li class="activity"><span class="time">Morning</span><span class="activity-icon">☕</span><span>Coffee and pastry at Rocky Mountain Bagel or Communitea Café — Canmore's best send-off</span></li>
+          <li class="activity"><span class="time">Morning</span><span class="activity-icon">🚗</span><span>Drive back to Calgary YYC (~1 hr) — one last look at those mountains</span></li>
+          <li class="activity"><span class="time">En Route</span><span class="activity-icon">🛍️</span><span>Grab last-minute Canmore souvenirs before hitting the highway</span></li>
+        </ul></div>
       </div>
 
     </div>
@@ -958,21 +392,17 @@
 </div>
 
 <!-- HIKES -->
-<div class="hikes-section">
+<div class="hikes-section" id="hikes">
   <div class="hikes-inner">
     <div class="section-label">Trail Guide</div>
     <div class="section-title">The Hikes</div>
     <p class="hikes-intro">Every hike on this trip is worth it — here's everything you need to know and prep before lacing up.</p>
 
-    <!-- HIKE 1 -->
     <div class="hike-card">
       <div class="hike-header">
-        <div class="hike-meta-top">
-          <span class="hike-tag sunrise-tag">🌅 Sunrise Hike</span>
-          <span class="difficulty-badge hard">Hard</span>
-        </div>
+        <div class="hike-meta-top"><span class="hike-tag sunrise-tag">🌅 Sunrise Hike · Day 2</span><span class="difficulty-badge hard">Hard</span></div>
         <h3 class="hike-name">Ha Ling Peak</h3>
-        <p class="hike-location">📍 Canmore — right from home base</p>
+        <p class="hike-location">📍 Canmore — 5 min drive from home base</p>
       </div>
       <div class="hike-stats">
         <div class="stat"><div class="stat-val">7.8 km</div><div class="stat-label">Round Trip</div></div>
@@ -981,18 +411,18 @@
         <div class="stat"><div class="stat-val">5 AM</div><div class="stat-label">Start Time</div></div>
       </div>
       <div class="hike-body">
-        <p class="hike-desc">A Canmore classic with big reward. The trail climbs steeply through forest before breaking out onto a rocky ridge. The summit delivers a jaw-dropping 360° view over the Bow Valley, Three Sisters, and into Banff. Starting before dawn means you'll catch sunrise at the top — one of the best experiences in the Rockies.</p>
+        <p class="hike-desc">A Canmore classic with massive reward. The trail climbs steeply through forest before breaking out onto a rocky ridge with a 360° view over the Bow Valley, Three Sisters, and into Banff. Starting before dawn means you'll catch sunrise at the summit — one of the most memorable experiences in the Rockies.</p>
         <div class="hike-sections">
           <div class="hike-detail-block">
             <h4>⚙️ Pre-Hike Logistics</h4>
             <ul class="hike-list">
-              <li>Set alarms for <strong>4:30 AM</strong> — you need time to dress, eat, and drive 5 min to the trailhead</li>
-              <li>Pack your bag <strong>the night before</strong>: headlamp, layers, snacks, 2L water per person</li>
-              <li>Trailhead parking is at <strong>Spray Lakes Road, Canmore</strong> — free, fills fast on weekends</li>
-              <li>Check sunrise time for June 26 (~5:40 AM) and plan to summit 20 min before</li>
+              <li>Set alarms for <strong>4:30 AM</strong> — need time to dress, eat, and drive 5 min to trailhead</li>
+              <li>Pack bag <strong>the night before</strong>: headlamp, layers, snacks, 2L water per person</li>
+              <li>Trailhead at <strong>Spray Lakes Road, Canmore</strong> — free parking, fills fast on weekends</li>
+              <li>Sunrise June 19 ~5:30 AM — aim to summit 20 min before</li>
               <li>Download <strong>AllTrails: Ha Ling Peak</strong> offline before bed</li>
-              <li>Wear sturdy trail shoes or boots — trail is rocky and steep near the top</li>
-              <li>No Parks Canada pass required (Canmore is outside the park)</li>
+              <li>Rocky and steep near top — proper waterproof boots required, not runners</li>
+              <li>No Parks Canada pass needed (Canmore is outside the park boundary)</li>
             </ul>
           </div>
           <div class="hike-detail-block">
@@ -1000,10 +430,10 @@
             <ul class="hike-list">
               <li>Headlamp (mandatory — dark on the way up)</li>
               <li>Warm mid-layer + wind shell (summit is cold at 5 AM)</li>
-              <li>Gloves & toque — seriously, it's chilly at the top in June</li>
+              <li>Gloves & toque — it's genuinely chilly at the top in June</li>
               <li>2L water + electrolytes</li>
               <li>High-energy snacks (bars, nuts, fruit)</li>
-              <li>Camera or fully charged phone</li>
+              <li>Camera or fully charged phone for the sunrise</li>
               <li>Trekking poles (optional but helpful on descent)</li>
             </ul>
           </div>
@@ -1011,13 +441,9 @@
       </div>
     </div>
 
-    <!-- HIKE 2 -->
     <div class="hike-card">
       <div class="hike-header">
-        <div class="hike-meta-top">
-          <span class="hike-tag">🏔️ Day 3</span>
-          <span class="difficulty-badge moderate">Moderate</span>
-        </div>
+        <div class="hike-meta-top"><span class="hike-tag">🏔️ Day 3</span><span class="difficulty-badge moderate">Moderate</span></div>
         <h3 class="hike-name">Peyto Lake + Bow Summit Lookout</h3>
         <p class="hike-location">📍 Icefields Parkway, ~90 min from Canmore</p>
       </div>
@@ -1028,40 +454,35 @@
         <div class="stat"><div class="stat-val">2,088 m</div><div class="stat-label">Peak Elevation</div></div>
       </div>
       <div class="hike-body">
-        <p class="hike-desc">Short but spectacular. The walk to the Bow Summit Lookout reveals one of the most photogenic lakes in the world — Peyto Lake glows an impossible neon turquoise thanks to glacial rock flour. The full loop to the lookout offers even broader alpine views above the treeline.</p>
+        <p class="hike-desc">Short but jaw-dropping. The Bow Summit Lookout reveals Peyto Lake glowing an impossible neon turquoise below — one of the most photogenic sights in the world, thanks to glacial rock flour suspended in the water. The full loop above the treeline offers panoramic alpine views in every direction.</p>
         <div class="hike-sections">
           <div class="hike-detail-block">
             <h4>⚙️ Pre-Hike Logistics</h4>
             <ul class="hike-list">
-              <li>Leave Canmore by <strong>7:30 AM</strong> — Icefields Parkway drive is 90 min and worth the early start</li>
-              <li>Parking at <strong>Bow Summit lot</strong> — fills by 9 AM on weekends, get there early</li>
-              <li><strong>Parks Canada pass required</strong> — have it displayed in the car</li>
-              <li>Trail starts at the upper parking lot, not the lower viewpoint</li>
-              <li>Pack a windbreaker — it's high altitude and exposed</li>
-              <li>Cell service is spotty on the Icefields Pkwy — download maps offline</li>
+              <li>Leave Canmore by <strong>7:30 AM</strong> — 90 min drive, worth the early start</li>
+              <li>Parking at <strong>Bow Summit lot</strong> — fills by 9 AM on weekends, arrive early</li>
+              <li><strong>Parks Canada pass required</strong> — displayed in car window</li>
+              <li>Trail starts at upper parking lot, not the lower viewpoint</li>
+              <li>Cell service is spotty on Icefields Pkwy — download offline maps the night before</li>
             </ul>
           </div>
           <div class="hike-detail-block">
             <h4>🎒 What to Bring</h4>
             <ul class="hike-list">
-              <li>Windproof jacket (high & exposed)</li>
+              <li>Windproof jacket (high altitude, exposed)</li>
               <li>1.5L water per person</li>
               <li>Sunscreen — UV is intense at altitude</li>
-              <li>Packed lunch for the glacier stop after</li>
-              <li>Binoculars (optional — incredible wildlife spotting)</li>
+              <li>Packed lunch for the glacier picnic after</li>
+              <li>Binoculars (optional — great wildlife spotting on the Parkway)</li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- HIKE 3 -->
     <div class="hike-card">
       <div class="hike-header">
-        <div class="hike-meta-top">
-          <span class="hike-tag">🏞️ Day 4</span>
-          <span class="difficulty-badge moderate">Moderate</span>
-        </div>
+        <div class="hike-meta-top"><span class="hike-tag">🏞️ Day 4</span><span class="difficulty-badge easy">Easy–Moderate</span></div>
         <h3 class="hike-name">Moraine Lake Rockpile Trail</h3>
         <p class="hike-location">📍 Moraine Lake Road, ~45 min from Canmore</p>
       </div>
@@ -1069,20 +490,19 @@
         <div class="stat"><div class="stat-val">0.8 km</div><div class="stat-label">Round Trip</div></div>
         <div class="stat"><div class="stat-val">60 m</div><div class="stat-label">Elevation Gain</div></div>
         <div class="stat"><div class="stat-val">20 min</div><div class="stat-label">Duration</div></div>
-        <div class="stat"><div class="stat-val">Easy–Mod</div><div class="stat-label">Difficulty</div></div>
+        <div class="stat"><div class="stat-val">1,884 m</div><div class="stat-label">Elevation</div></div>
       </div>
       <div class="hike-body">
-        <p class="hike-desc">Short, steep scramble up a boulder pile that delivers the most iconic view in Canada — the ten peaks reflected in the electric blue of Moraine Lake. It's brief but unforgettable, and the perfect opener before the bigger hike of the day.</p>
+        <p class="hike-desc">A short, steep scramble up a boulder pile that delivers the most iconic view in Canada — the Valley of the Ten Peaks reflected in Moraine Lake's electric blue water. Brief but absolutely unforgettable, and the perfect opener before the bigger hike of the day.</p>
         <div class="hike-sections">
           <div class="hike-detail-block">
             <h4>⚙️ Pre-Hike Logistics</h4>
             <ul class="hike-list">
-              <li><strong>⚠️ Critical:</strong> Moraine Lake Road access requires a <strong>Parks Canada shuttle reservation</strong> (book online weeks in advance) OR arrive before 6 AM to self-drive</li>
-              <li>Book shuttles at <strong>reservation.pc.gc.ca</strong> — they sell out in minutes when released</li>
-              <li>Shuttle departs from Banff or Lake Louise — plan travel accordingly from Canmore</li>
-              <li>If shuttles are sold out: self-drive before 6 AM or bike in from Lake Louise (11 km)</li>
+              <li><strong>⚠️ Critical:</strong> Moraine Lake Road requires a <strong>Parks Canada shuttle reservation</strong> — book at reservation.pc.gc.ca weeks in advance, tickets sell out in minutes</li>
+              <li>Shuttle departs from Banff or Lake Louise — plan Canmore travel accordingly</li>
+              <li>Alternative if sold out: self-drive before <strong>6 AM</strong> or bike in from Lake Louise (11 km)</li>
               <li>No dogs allowed on the trail</li>
-              <li>Bears are very active in this area — carry bear spray</li>
+              <li>Bears are very active in this valley — carry bear spray at all times</li>
             </ul>
           </div>
           <div class="hike-detail-block">
@@ -1090,8 +510,8 @@
             <ul class="hike-list">
               <li>Bear spray (mandatory in this valley)</li>
               <li>Comfortable trail shoes (boulders can be slippery)</li>
-              <li>Camera — the view is the whole point</li>
-              <li>Layers — lake valley can be cold in the morning</li>
+              <li>Camera — the view is literally the entire point</li>
+              <li>Warm layers — the valley is cold in early morning</li>
               <li>1L water minimum</li>
             </ul>
           </div>
@@ -1099,13 +519,9 @@
       </div>
     </div>
 
-    <!-- HIKE 4 -->
     <div class="hike-card">
       <div class="hike-header">
-        <div class="hike-meta-top">
-          <span class="hike-tag">🏔️ Day 4 (Optional)</span>
-          <span class="difficulty-badge hard">Hard</span>
-        </div>
+        <div class="hike-meta-top"><span class="hike-tag">🏔️ Day 4 — Optional</span><span class="difficulty-badge hard">Hard</span></div>
         <h3 class="hike-name">Plain of Six Glaciers Trail</h3>
         <p class="hike-location">📍 Lake Louise, ~50 min from Canmore</p>
       </div>
@@ -1116,30 +532,30 @@
         <div class="stat"><div class="stat-val">2,135 m</div><div class="stat-label">Peak Elevation</div></div>
       </div>
       <div class="hike-body">
-        <p class="hike-desc">One of the finest hikes in the Canadian Rockies. Starting right at Lake Louise, the trail winds above the lakeshore and up into a high alpine moraine directly below the Victoria Glacier. The historic Plain of Six Glaciers teahouse (open June–October) is a perfect halfway reward. Absolutely breathtaking.</p>
+        <p class="hike-desc">One of the finest hikes in the Canadian Rockies. Starting at Lake Louise, the trail winds above the lakeshore into a high alpine moraine directly below Victoria Glacier. The historic Plain of Six Glaciers teahouse is a perfect halfway reward. An absolute must if the group has the legs for it.</p>
         <div class="hike-sections">
           <div class="hike-detail-block">
             <h4>⚙️ Pre-Hike Logistics</h4>
             <ul class="hike-list">
               <li>Start from <strong>Lake Louise lakeshore parking</strong> — arrive by 8 AM before lots fill</li>
-              <li>Parks Canada pass required — displayed in car at the Banff park gate</li>
+              <li>Parks Canada pass required — at the gate entering Banff</li>
               <li>Trail begins at the far end of the Lake Louise lakeshore walk</li>
-              <li>Teahouse is cash only and not always open early — don't rely on it for lunch</li>
-              <li>Trail can have snow patches in late June above the teahouse — microspikes may help</li>
-              <li>Check weather forecast the morning before — exposed upper sections in a storm are dangerous</li>
-              <li>Register your hike plan with someone back at the accommodation</li>
+              <li>Teahouse is <strong>cash only</strong> and doesn't open early — bring your own lunch</li>
+              <li>Snow patches possible above teahouse in mid-June — microspikes may help</li>
+              <li>Check weather morning-of — exposed upper sections are dangerous in a storm</li>
+              <li>Leave a hike plan with someone back at the accommodation</li>
             </ul>
           </div>
           <div class="hike-detail-block">
             <h4>🎒 What to Bring</h4>
             <ul class="hike-list">
               <li>2.5L water per person</li>
-              <li>Full lunch + snacks (long day out)</li>
-              <li>Trekking poles (very helpful on this one)</li>
+              <li>Full lunch + snacks (this is a long day)</li>
+              <li>Trekking poles (very helpful)</li>
               <li>Bear spray</li>
-              <li>Waterproof boots (snow & wet sections possible)</li>
+              <li>Waterproof boots — snow & wet sections likely</li>
               <li>Rain jacket + warm layer</li>
-              <li>Cash for the teahouse (hot tea = absolute heaven up there)</li>
+              <li>Cash for the teahouse — hot tea at 2,135m is pure bliss</li>
               <li>First aid kit</li>
             </ul>
           </div>
@@ -1150,80 +566,240 @@
   </div>
 </div>
 
-<!-- PACKING -->
-<div class="packing-section">
-  <div class="packing-inner">
-    <div class="section-label">Don't Forget</div>
-    <div class="section-title">What to Pack</div>
+<!-- MAP -->
+<div class="map-section" id="map">
+  <div class="map-inner">
+    <div class="section-label">Where We're Going</div>
+    <div class="section-title">The Map</div>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m46!1m12!1m3!1d680000!2d-115.8!3d51.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m31!3e0!4m5!1s0x5370ca3338d41bc9%3A0x4b5e7e4b5c9fa1f1!2sCanmore%2C+AB!3m2!1d51.0892!2d-115.3593!4m5!1s0x5370ca3b7a8d8d7b%3A0x4b5e7e4b5c9fa1f1!2sBanff%2C+AB!3m2!1d51.1784!2d-115.5708!4m5!1s0x5370a3e95b6e7a1b%3A0x1!2sMoraine+Lake%2C+AB!3m2!1d51.3217!2d-116.1772!4m5!1s0x5370a82e4aba4b1b%3A0x1!2sLake+Louise%2C+AB!3m2!1d51.4163!2d-116.2073!4m5!1s0x5370c1d1e1f1a1b1%3A0x1!2sPeyto+Lake+Viewpoint!3m2!1d51.7237!2d-116.527!5e0!3m2!1sen!2sca!4v1700000000001"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <div class="map-pins">
+      <div class="map-pin"><div class="pin-icon">🏡</div><div class="pin-info"><h4>Canmore</h4><p>Home base · 4 nights</p></div></div>
+      <div class="map-pin"><div class="pin-icon">🏙️</div><div class="pin-info"><h4>Banff Town</h4><p>15 min · Days 1 & 2</p></div></div>
+      <div class="map-pin"><div class="pin-icon">🥾</div><div class="pin-info"><h4>Ha Ling Peak</h4><p>5 min · Day 2 sunrise</p></div></div>
+      <div class="map-pin"><div class="pin-icon">💎</div><div class="pin-info"><h4>Peyto Lake</h4><p>90 min · Day 3</p></div></div>
+      <div class="map-pin"><div class="pin-icon">🧊</div><div class="pin-info"><h4>Columbia Icefield</h4><p>2 hrs · Day 3</p></div></div>
+      <div class="map-pin"><div class="pin-icon">💙</div><div class="pin-info"><h4>Moraine & Louise</h4><p>45–50 min · Day 4</p></div></div>
+    </div>
+  </div>
+</div>
 
-    <div class="packing-grid">
-      <div class="packing-category">
-        <h4>🥾 Hiking</h4>
-        <ul>
-          <li>Hiking boots (waterproof)</li>
-          <li>Trekking poles</li>
-          <li>Headlamp + extra batteries</li>
-          <li>Daypack (20–30L)</li>
-          <li>Wool or synthetic socks</li>
-        </ul>
-      </div>
-      <div class="packing-category">
-        <h4>🧥 Layers</h4>
-        <ul>
-          <li>Base layer (moisture-wicking)</li>
-          <li>Mid layer (fleece or down)</li>
-          <li>Rain jacket (essential!)</li>
-          <li>Warm hat & gloves</li>
-          <li>Sun hat & sunglasses</li>
-        </ul>
-      </div>
-      <div class="packing-category">
-        <h4>🌿 Essentials</h4>
-        <ul>
-          <li>Sunscreen (SPF 50+)</li>
-          <li>Bug spray</li>
-          <li>Bear spray (rent in Banff)</li>
-          <li>Refillable water bottle</li>
-          <li>Snacks & trail mix</li>
-        </ul>
-      </div>
-      <div class="packing-category">
-        <h4>📱 Tech & Docs</h4>
-        <ul>
-          <li>Parks Canada pass</li>
-          <li>Offline maps downloaded</li>
-          <li>Camera + extra SD cards</li>
-          <li>Portable charger</li>
-          <li>Travel insurance docs</li>
-        </ul>
+<!-- FOOD -->
+<div class="food-section" id="food">
+  <div class="food-inner">
+    <div class="section-label">Eat & Drink</div>
+    <div class="section-title">Food Guide</div>
+    <div class="food-tabs">
+      <div class="food-tab active" onclick="switchTab(event,'canmore')">🏡 Canmore</div>
+      <div class="food-tab" onclick="switchTab(event,'banff')">🏔️ Banff</div>
+      <div class="food-tab" onclick="switchTab(event,'coffee')">☕ Coffee & Bakeries</div>
+    </div>
+    <div class="food-panel active" id="tab-canmore">
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Tavern 1883</div><div class="restaurant-price">$$</div></div><div class="restaurant-location">📍 Canmore · Main St</div><div class="restaurant-desc">Classic mountain pub with burgers, local beers, and a great patio. Perfect group welcome dinner energy.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Pub</span><span class="rtag">Patio</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">The Trough</div><div class="restaurant-price">$$$</div></div><div class="restaurant-location">📍 Canmore · Downtown</div><div class="restaurant-desc">Beloved Canmore institution — rustic-chic dining, creative Canadian cuisine, great wine. Best for a nicer night out.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Fine-ish</span><span class="rtag">Canadian</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Grizzly Paw Brewing</div><div class="restaurant-price">$$</div></div><div class="restaurant-location">📍 Canmore · Main St</div><div class="restaurant-desc">Canmore's iconic craft brewery. Excellent house brews, hearty pub food, lively atmosphere. Don't miss the Grizzly Paw Pale Ale.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Craft Beer</span><span class="rtag">Casual</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Rustica</div><div class="restaurant-price">$$$</div></div><div class="restaurant-location">📍 Canmore · 8th St</div><div class="restaurant-desc">Italian-inspired mountain kitchen with handmade pasta and wood-fired dishes. Great splurge after a hard hike day.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Italian</span><span class="rtag">Date Night</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Communitea Café</div><div class="restaurant-price">$</div></div><div class="restaurant-location">📍 Canmore · 7th Ave</div><div class="restaurant-desc">Canmore's favourite brunch spot. Hearty bowls, eggs, wraps, killer smoothies. Huge portions — perfect post-hike fuel.</div><div class="restaurant-tags"><span class="rtag">Brunch</span><span class="rtag">Casual</span><span class="rtag">Vegetarian-Friendly</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Summit Café</div><div class="restaurant-price">$</div></div><div class="restaurant-location">📍 Canmore · Downtown</div><div class="restaurant-desc">Quick, fresh lunch spot — great sandwiches and soups. Ideal for building packed lunches before trail days.</div><div class="restaurant-tags"><span class="rtag">Lunch</span><span class="rtag">Takeout</span><span class="rtag">Quick</span></div></div>
+    </div>
+    <div class="food-panel" id="tab-banff">
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">The Bison</div><div class="restaurant-price">$$$</div></div><div class="restaurant-location">📍 Banff · Bear St</div><div class="restaurant-desc">Upscale-casual Rocky Mountain fare — bison, elk, and local produce in a cozy log-cabin setting. One of Banff's best.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Canadian</span><span class="rtag">Upscale</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Banff Ave Brewing Co.</div><div class="restaurant-price">$$</div></div><div class="restaurant-location">📍 Banff · Banff Ave</div><div class="restaurant-desc">Lively rooftop patio, solid craft brews, great people-watching on Banff Ave. Perfect for casual lunch or après-hike pints.</div><div class="restaurant-tags"><span class="rtag">Lunch</span><span class="rtag">Craft Beer</span><span class="rtag">Patio</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Saltlik Steakhouse</div><div class="restaurant-price">$$$$</div></div><div class="restaurant-location">📍 Banff · Bear St</div><div class="restaurant-desc">Best steak in the Rockies. AAA Canadian beef, sleek interior, excellent wine list. Worth every penny for a big celebration dinner.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Steak</span><span class="rtag">Special Occasion</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Coyotes Southwestern Grill</div><div class="restaurant-price">$$</div></div><div class="restaurant-location">📍 Banff · Caribou St</div><div class="restaurant-desc">Colourful, lively spot with big flavours — tacos, enchiladas, killer margaritas. Great energy for a fun group night.</div><div class="restaurant-tags"><span class="rtag">Dinner</span><span class="rtag">Mexican</span><span class="rtag">Margaritas</span></div></div>
+    </div>
+    <div class="food-panel" id="tab-coffee">
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Rocky Mountain Bagel</div><div class="restaurant-price">$</div></div><div class="restaurant-location">📍 Canmore · Main St</div><div class="restaurant-desc">Fresh-baked bagels, great coffee, buzzy morning energy. A true Canmore institution — expect a weekend lineup, totally worth it.</div><div class="restaurant-tags"><span class="rtag">Breakfast</span><span class="rtag">Coffee</span><span class="rtag">Quick</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Wild Flour Bakery</div><div class="restaurant-price">$</div></div><div class="restaurant-location">📍 Banff · Bear St</div><div class="restaurant-desc">Banff's best bakery — organic pastries, fresh bread, excellent coffee. Perfect fuel stop before a big day in the park.</div><div class="restaurant-tags"><span class="rtag">Breakfast</span><span class="rtag">Bakery</span><span class="rtag">Coffee</span></div></div>
+      <div class="restaurant-card"><div class="restaurant-top"><div class="restaurant-name">Fairmont Chateau Louise</div><div class="restaurant-price">$$$</div></div><div class="restaurant-location">📍 Lake Louise · Lakeshore</div><div class="restaurant-desc">Splurge on afternoon tea at the Fairmont overlooking Lake Louise. A once-in-a-trip experience — reserve well in advance.</div><div class="restaurant-tags"><span class="rtag">Afternoon Tea</span><span class="rtag">Special</span><span class="rtag">Reserve Ahead</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- WEATHER -->
+<div class="weather-section" id="weather">
+  <div class="weather-inner">
+    <div class="section-label">What to Expect</div>
+    <div class="section-title">June Weather<br>in the Rockies</div>
+    <div class="weather-grid">
+      <div class="weather-card"><div class="weather-icon">🌡️</div><div class="weather-title">Daytime High</div><div class="weather-val">16–20°C</div><div class="weather-note">Warm in the valley, cooler at elevation. Perfect hiking conditions.</div></div>
+      <div class="weather-card"><div class="weather-icon">🌙</div><div class="weather-title">Overnight Low</div><div class="weather-val">3–7°C</div><div class="weather-note">Chilly nights — bring a warm layer for the sunrise hike especially.</div></div>
+      <div class="weather-card"><div class="weather-icon">🌧️</div><div class="weather-title">Precipitation</div><div class="weather-val">Moderate</div><div class="weather-note">June is rainy season. Afternoon thunderstorms are common — start hikes early.</div></div>
+      <div class="weather-card"><div class="weather-icon">☀️</div><div class="weather-title">Daylight</div><div class="weather-val">~17 hrs</div><div class="weather-note">Sunrise ~5:30 AM, sunset ~9:45 PM. Long, glorious mountain days.</div></div>
+      <div class="weather-card"><div class="weather-icon">🏔️</div><div class="weather-title">Summit Temp</div><div class="weather-val">0–5°C</div><div class="weather-note">Alpine summits are significantly colder. Always pack a toque and gloves.</div></div>
+      <div class="weather-card"><div class="weather-icon">❄️</div><div class="weather-title">Snow</div><div class="weather-val">Possible</div><div class="weather-note">Snow patches likely at high elevation mid-June. Microspikes useful on Six Glaciers trail.</div></div>
+    </div>
+    <div class="weather-tips">
+      <h4>🎯 Key Weather Tips for This Trip</h4>
+      <div class="tips-grid">
+        <div class="tip-item"><div class="tip-icon">⏰</div><div class="tip-text"><strong>Start hikes early</strong>Afternoon thunderstorms build fast — aim to summit before noon on all hikes.</div></div>
+        <div class="tip-item"><div class="tip-icon">🧥</div><div class="tip-text"><strong>Layer up, always</strong>Even on warm days, temps drop sharply with elevation. Always carry a wind shell and mid-layer.</div></div>
+        <div class="tip-item"><div class="tip-icon">☔</div><div class="tip-text"><strong>Rain jacket every day</strong>Pack a waterproof shell in your daypack every single day without exception.</div></div>
+        <div class="tip-item"><div class="tip-icon">🕔</div><div class="tip-text"><strong>Ha Ling at 5 AM is cold</strong>Expect 2–5°C at the summit at sunrise. Wear your warmest layers — you'll warm up hiking down.</div></div>
+        <div class="tip-item"><div class="tip-icon">📱</div><div class="tip-text"><strong>Check forecast daily</strong>Use Parks Canada app or Weather Network each morning — mountain weather is unpredictable.</div></div>
+        <div class="tip-item"><div class="tip-icon">🧴</div><div class="tip-text"><strong>Sunscreen every day</strong>UV is intense at altitude even on cloudy days. SPF 50+ and reapply on long hike days.</div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- BUDGET -->
+<div class="budget-section" id="budget">
+  <div class="budget-inner">
+    <div class="section-label">Cost Breakdown</div>
+    <div class="section-title">Budget Estimate</div>
+    <p class="budget-note">Estimated per-person costs based on a group of 4–5. All prices in CAD.</p>
+    <table class="budget-table">
+      <thead><tr><th>Item</th><th>Notes</th><th>Est. / Person</th></tr></thead>
+      <tbody>
+        <tr class="category-row"><td colspan="3">Accommodation</td></tr>
+        <tr><td>Canmore Airbnb (4 nights)</td><td>~$400–600/night total ÷ group</td><td>$400–600</td></tr>
+        <tr class="category-row"><td colspan="3">Transport</td></tr>
+        <tr><td>Flights (return)</td><td>Varies by origin — book early</td><td>$300–700</td></tr>
+        <tr><td>Rental car (4 days, SUV)</td><td>~$120–160/day ÷ group</td><td>$100–150</td></tr>
+        <tr><td>Gas (daily drives)</td><td>~$80–100 total ÷ group</td><td>$20–30</td></tr>
+        <tr class="category-row"><td colspan="3">Parks & Activities</td></tr>
+        <tr><td>Parks Canada Discovery Pass</td><td>Annual pass — covers all visits</td><td>$75</td></tr>
+        <tr><td>Moraine Lake shuttle</td><td>reservation.pc.gc.ca — book early!</td><td>$20–30</td></tr>
+        <tr><td>Columbia Icefield Ice Explorer</td><td>Optional glacier tour</td><td>$60–80</td></tr>
+        <tr><td>Lake Louise canoe rental</td><td>~$165/hr ÷ group</td><td>$35–50</td></tr>
+        <tr class="category-row"><td colspan="3">Food & Drink</td></tr>
+        <tr><td>Groceries & packed lunches</td><td>Stock up at IGA in Canmore</td><td>$80–120</td></tr>
+        <tr><td>Restaurants (4 dinners, 2 brunches)</td><td>Mix of casual + one nice dinner</td><td>$250–350</td></tr>
+        <tr><td>Coffee, snacks & drinks</td><td>Daily incidentals</td><td>$60–80</td></tr>
+        <tr class="category-row"><td colspan="3">Gear & Misc</td></tr>
+        <tr><td>Bear spray rental</td><td>Snowtips-Bactrax, Canmore</td><td>$15–20</td></tr>
+        <tr><td>Souvenirs & misc</td><td>Up to you!</td><td>$30–80</td></tr>
+        <tr class="total-row"><td><strong>Total Estimate</strong></td><td></td><td><strong>~$1,445–2,365 CAD</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="budget-disclaimer">💡 Tip: Cooking a few meals at the Airbnb — especially breakfasts and packed lunches — can save $100+ per person. Splitting accommodation and rental car evenly keeps things simple.</p>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="checklist-section" id="checklist">
+  <div class="checklist-inner">
+    <div class="section-label">Before You Go</div>
+    <div class="section-title">Pre-Trip Checklist</div>
+    <p class="checklist-intro">Click to check off items as you complete them. The urgent ones book up months in advance — don't sleep on them.</p>
+    <div class="timeline">
+
+      <div class="timeline-group">
+        <div class="timeline-label"><span>Right Now</span></div>
+        <div class="timeline-tasks"><ul class="checklist-items">
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Book flights to Calgary (YYC)</strong><span class="check-sub">Prices rise as June gets closer — lock in now</span></div><span class="urgent-tag">Urgent</span></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Book Canmore Airbnb / accommodation</strong><span class="check-sub">June fills extremely fast — this is the most critical booking</span></div><span class="urgent-tag">Urgent</span></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Reserve Moraine Lake shuttle</strong><span class="check-sub">reservation.pc.gc.ca — releases ~3 months ahead, sells out in literal minutes</span></div><span class="urgent-tag">Urgent</span></li>
+        </ul></div>
+      </div>
+
+      <div class="timeline-group">
+        <div class="timeline-label"><span>2–3 Months</span></div>
+        <div class="timeline-tasks"><ul class="checklist-items">
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Buy Parks Canada Discovery Pass</strong><span class="check-sub">$145.25/adult annual pass — purchase at pc.gc.ca</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Reserve rental car in Calgary</strong><span class="check-sub">Book an SUV or AWD — mountain roads can be rough</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Book Columbia Icefield Ice Explorer</strong><span class="check-sub">Optional but popular — reserve at explorerockies.com</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Purchase travel insurance</strong><span class="check-sub">Essential for hiking trips — ensure medical evacuation is covered</span></div></li>
+        </ul></div>
+      </div>
+
+      <div class="timeline-group">
+        <div class="timeline-label"><span>1 Month</span></div>
+        <div class="timeline-tasks"><ul class="checklist-items">
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Check all passports & IDs are valid</strong><span class="check-sub">Canadian IDs for domestic travel; valid passport for international travellers</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Gear check — buy or borrow what's missing</strong><span class="check-sub">Hiking boots, rain jacket, trekking poles, headlamp, daypack</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Break in hiking boots if they're new</strong><span class="check-sub">Wear them on several walks before the trip — no blisters on Ha Ling!</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Confirm group logistics</strong><span class="check-sub">Who's on which flights? Splitting the car? Accommodation cost split?</span></div></li>
+        </ul></div>
+      </div>
+
+      <div class="timeline-group">
+        <div class="timeline-label"><span>1 Week</span></div>
+        <div class="timeline-tasks"><ul class="checklist-items">
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Download offline maps</strong><span class="check-sub">AllTrails (Ha Ling, Six Glaciers) + Google Maps for Canmore, Banff & Icefields Pkwy — zero cell service on trails</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Check weather forecasts</strong><span class="check-sub">Weather Network or Environment Canada for Canmore/Banff region</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Pack your bag</strong><span class="check-sub">Use the packing list below — don't forget headlamp and layers!</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Share itinerary with someone at home</strong><span class="check-sub">Good safety practice for backcountry hiking — leave this site or a copy of the itinerary</span></div></li>
+        </ul></div>
+      </div>
+
+      <div class="timeline-group">
+        <div class="timeline-label"><span>Night Before</span></div>
+        <div class="timeline-tasks"><ul class="checklist-items">
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Pack daypack the night before every hike</strong><span class="check-sub">Water, snacks, layers, headlamp, bear spray — do it before bed, not at 5 AM</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Set multiple alarms for Ha Ling hike (Day 2)</strong><span class="check-sub">4:30 AM — this is the crown jewel of the trip, don't oversleep it</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Rent bear spray from Snowtips-Bactrax</strong><span class="check-sub">Located on Canmore's main strip — pick up on arrival day</span></div></li>
+          <li class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><strong>Check tomorrow's weather & sunrise time</strong><span class="check-sub">Adjust plans if storms are forecast — safety always comes first</span></div></li>
+        </ul></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PACKING -->
+<div class="packing-section" id="packing">
+  <div class="packing-inner">
+    <div class="section-label">Don't Forget</div>
+    <div class="section-title">What to Pack</div>
+    <div class="packing-grid">
+      <div class="packing-category"><h4>🥾 Hiking</h4><ul><li>Hiking boots (waterproof, broken in)</li><li>Trekking poles</li><li>Headlamp + extra batteries</li><li>Daypack (20–30L)</li><li>Wool or synthetic socks</li><li>Microspikes (optional — Six Glaciers)</li></ul></div>
+      <div class="packing-category"><h4>🧥 Layers</h4><ul><li>Base layer (moisture-wicking)</li><li>Mid layer (fleece or down)</li><li>Rain jacket (non-negotiable)</li><li>Warm hat & gloves</li><li>Sun hat & sunglasses</li></ul></div>
+      <div class="packing-category"><h4>🌿 Essentials</h4><ul><li>Sunscreen (SPF 50+)</li><li>Bug spray</li><li>Bear spray (rent in Canmore)</li><li>Refillable water bottle (2L+)</li><li>Snacks & trail mix</li><li>First aid kit</li></ul></div>
+      <div class="packing-category"><h4>📱 Tech & Docs</h4><ul><li>Parks Canada pass (printed + digital)</li><li>Offline maps (AllTrails + Google)</li><li>Camera + extra SD cards</li><li>Portable charger</li><li>Travel insurance docs</li><li>Moraine Lake shuttle confirmation</li></ul></div>
+    </div>
+  </div>
+</div>
+
 <footer>
   Made with ❤️ for the crew &nbsp;·&nbsp; <span>Banff 2026</span> &nbsp;·&nbsp; See you in the mountains 🏔️
 </footer>
 
 <script>
-  // Generate stars
-  const starsContainer = document.getElementById('stars');
-  for (let i = 0; i < 80; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 2.5 + 0.5;
-    star.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
-      top: ${Math.random() * 100}%;
-      left: ${Math.random() * 100}%;
-      animation-delay: ${Math.random() * 4}s;
-      animation-duration: ${2 + Math.random() * 3}s;
-    `;
-    starsContainer.appendChild(star);
-  }
-</script>
+// Stars
+const sc = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s;`;
+  sc.appendChild(s);
+}
 
+// Sticky nav show/hide
+const nav = document.getElementById('stickyNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
+});
+
+// Active nav link
+const allSections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  });
+}, { rootMargin: '-25% 0px -65% 0px' });
+allSections.forEach(s => obs.observe(s));
+
+// Food tabs
+function switchTab(e, tab) {
+  document.querySelectorAll('.food-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.food-panel').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// Checklist toggle
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  item.querySelector('.check-box').textContent = item.classList.contains('checked') ? '✓' : '';
+}
+</script>
 </body>
 </html>
